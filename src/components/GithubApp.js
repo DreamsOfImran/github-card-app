@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useCookies } from 'react-cookie'
 
 import Form from "./Form";
 import CardList from "./CardList";
@@ -7,9 +8,20 @@ import CardList from "./CardList";
 
 const GithubApp = ({ title }) => {
   const [profiles, setProfiles] = useState([]);
+  const [profileCookies, setProfileCookies] = useCookies(['profiles'])
+
+  useEffect(() => {
+    if(!!profileCookies.profiles) {
+      setProfiles(profileCookies.profiles)
+    }
+  }, [])
+
 
   const addNewProfile = (profileData) => {
+    console.log()
     setProfiles([...profiles, profileData]);
+
+    setProfileCookies('profiles', [...profiles, profileData], { path: '/' })
   };
   return (
     <div>
