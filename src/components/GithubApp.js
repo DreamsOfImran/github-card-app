@@ -18,7 +18,6 @@ const GithubApp = ({ title }) => {
 
 
   const addNewProfile = (profileData) => {
-    console.log()
     setProfiles([...profiles, profileData]);
 
     setProfileCookies('profiles', [...profiles, profileData], { path: '/' })
